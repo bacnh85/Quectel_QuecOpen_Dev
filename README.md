@@ -1,6 +1,5 @@
 # Introduction
 
-
 ## Requirement 
 
 1. Install Docker for MacOS from [Docker For Mac](https://docs.docker.com/docker-for-mac/install/). 
@@ -16,6 +15,8 @@
 ```
 $ ./script/bootstrap
 ```
+
+Note: I do export `/Users` and `/Volumes/Work` to NFS. Adjust it to match your machine. 
 
 ## Compile kernel, rootfs, ...
 

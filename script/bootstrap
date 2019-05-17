@@ -1,22 +1,22 @@
 #!/bin/sh
 
-# Debian alike distros or WSL
-install_packages_apt()
-{
-
-}
-
 # MacOS
 install_packages_brew()
-{
-    # add autotools
-    brew install automake libtool
-
+{ 
     # Install adnroid tool
+    echo "Installing Andrroid Tools ... "
     brew cask install android-platform-tools
 
     # Setup NFS
-    ./macos_setup_nfs.sh
+    sh script/macos_setup_nfs.sh
+
+    # Get UID, GID from the host and paste to docker container
+    echo "Setting the UID, GID to the DockerFile"
+    U=`id -u`
+    G=`id -g`
+
+    sed -i -e 's,UID=501,'UID="$U"',' Dockerfile
+    sed -i -e 's,UNAME=bacnh,'UNAME="$USER"',' Dockerfile
 }
 
 install_packages_source()
@@ -27,13 +27,7 @@ install_packages_source()
 install_packages()
 {
     PM=source
-    if which apt-get; then
-        PM=apt
-    elif which rpm; then
-        PM=rpm
-    elif which opkg; then
-        PM=opkg
-    elif which brew; then
+    if which brew; then
         PM=brew
     fi
     install_packages_$PM
