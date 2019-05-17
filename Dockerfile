@@ -8,7 +8,7 @@ ARG UNAME=bacnh
 RUN apt-get update && apt-get install -y \
 	build-essential libncurses5-dev gawk git libssl-dev gettext zlib1g-dev swig unzip time \
 	wget python subversion file \
-	intltool quilt vim \ 
+	intltool quilt vim bc liblzo2-dev tree\ 
 # add user tux
 	&& useradd -m -u $UID -s /bin/bash $UNAME 
 

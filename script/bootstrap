@@ -1,0 +1,48 @@
+#!/bin/sh
+
+# Debian alike distros or WSL
+install_packages_apt()
+{
+
+}
+
+# MacOS
+install_packages_brew()
+{
+    # add autotools
+    brew install automake libtool
+
+    # Install adnroid tool
+    brew cask install android-platform-tools
+
+    # Setup NFS
+    ./macos_setup_nfs.sh
+}
+
+install_packages_source()
+{
+    echo 'source not supported currently' && false
+}
+
+install_packages()
+{
+    PM=source
+    if which apt-get; then
+        PM=apt
+    elif which rpm; then
+        PM=rpm
+    elif which opkg; then
+        PM=opkg
+    elif which brew; then
+        PM=brew
+    fi
+    install_packages_$PM
+}
+
+main()
+{
+    install_packages
+    
+}
+
+main
