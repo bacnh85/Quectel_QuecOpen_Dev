@@ -1,13 +1,12 @@
 # build image: docker build -t ngohaibac/ubuntu14.04 .
 FROM ubuntu:16.04
 ARG UID=501
-ARG GID=20
 ARG UNAME=bacnh
 
 # Update packages
 RUN apt-get update && apt-get install -y \
 	build-essential libncurses5-dev gawk git libssl-dev gettext zlib1g-dev swig unzip time \
-	wget python subversion file \
+	wget python subversion file cmake\
 	intltool quilt vim bc liblzo2-dev tree \ 
 # add user tux
 	&& useradd -m -u $UID -g staff -s /bin/bash $UNAME
