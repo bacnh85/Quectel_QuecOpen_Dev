@@ -1,20 +1,20 @@
-# build image: docker build -t ngohaibac/ubuntu14.04 .
 FROM ubuntu:16.04
-ARG UID=501
-ARG UNAME=bacnh
+
+# Docker variables
+ARG UID=1000
+ARG GID=1000
 
 # Update packages
 RUN apt-get update && apt-get install -y \
 	build-essential libncurses5-dev gawk git libssl-dev gettext zlib1g-dev swig unzip time \
 	wget python subversion file cmake\
 	intltool quilt vim bc liblzo2-dev tree \ 
-# add user tux
-	&& useradd -m -u $UID -g staff -s /bin/bash $UNAME
+	# Clean up
+	&& rm -rf /var/lib/apt/lists/*
 
-USER $UNAME
 WORKDIR /opt
-VOLUME ["/opt"]
+VOLUME [ "/opt" ]
 
-ENTRYPOINT /bin/bash
-
-CMD ["true"]
+ADD entrypoint.sh /
+RUN chmod u+x /entrypoint.sh
+ENTRYPOINT ["sh","/entrypoint.sh"]

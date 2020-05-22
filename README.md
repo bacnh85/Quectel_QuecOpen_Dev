@@ -1,22 +1,34 @@
 # Introduction
 
-## Requirement 
+QuecOpen is originally meant for OpenLinux modules of Quectel: EC2x, AG35 modules where end-user can program their own application run along with the Quectel processes.
 
-1. Install Docker for MacOS from [Docker For Mac](https://docs.docker.com/docker-for-mac/install/). 
+There are more example at [QuecOpen Example repo](https://github.com/bacnh85/Quectel_QuecOpen_Examples).
 
-2. Install home-brew 
+## Prepare
+
+1. [Install docker](https://docs.docker.com/get-docker/) for your machine
+
+2. For MacOS, pls config NFS share for nfsd with [macos_setup_nfs.sh script](script/macos_setup_nfs.sh), so you could take advantage of read/write access compare to Mac FS driver.
+
+## Usage for Linux users
+
+1. Pull the docker image
 
 ```
-/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+docker pull bacnh85/quectel-quecopen
 ```
 
-3. Config NFS for MacOS to speed up the write to bind mount, and also install ADB Tools
+2. Create docker container that point to your working directory
 
 ```
-$ ./script/bootstrap
+docker run -d --name quectel-quecopen -e UID=`id -u` -e GID=`id -g` -v "$(pwd)":/opt -v ~/.ssh:/home/${UID}/.ssh bacnh85/quectel-quecopen
 ```
 
-Note: I do export `/Users` and `/Volumes/Work` to NFS. Adjust it to match your machine. 
+3. Start the container shell to start build your application, the rootfs, kernel, ... 
+
+```
+docker exec -it -u $UID quectel-quecopen /bin/bash
+```
 
 ## Compile kernel, rootfs, ...
 

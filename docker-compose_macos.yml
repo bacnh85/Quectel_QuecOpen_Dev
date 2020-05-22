@@ -1,0 +1,19 @@
+version: '2'
+services:
+  quectel-quecopen-dev:
+    image: bacnh85/quectel-quecopen
+    container_name: quectel-quecopen
+    environment:
+      - UID=501
+      - PID=20
+    volumes:
+      - "nfsmount:/opt"
+      - ~/.ssh:/home/501/.ssh:cached
+    tty: true
+volumes:
+  nfsmount:
+    driver: local
+    driver_opts:
+      type: nfs
+      o: addr=host.docker.internal,rw,nolock,hard,nointr,nfsvers=3
+      device: ":${PWD}"

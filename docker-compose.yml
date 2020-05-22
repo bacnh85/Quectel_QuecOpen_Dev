@@ -1,17 +1,1 @@
-version: '2'
-services:
-  openwrt_dev_machine:
-    build: .
-    image: ngohaibac/quecopen-dev
-    container_name: quecopen-dev
-    volumes:
-      - "nfsmount:/opt"
-      - ~/.ssh:/home/bacnh/.ssh:cached
-    tty: true
-volumes:
-  nfsmount:
-    driver: local
-    driver_opts:
-      type: nfs
-      o: addr=host.docker.internal,rw,nolock,hard,nointr,nfsvers=3
-      device: ":${PWD}"
+docker-compose_linux.yml

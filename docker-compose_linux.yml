@@ -1,0 +1,12 @@
+version: '2'
+services:
+  quectel-quecopen-dev:
+    image: bacnh85/quectel-quecopen
+    container_name: quectel-quecopen
+    environment:
+      - UID=1000
+      - PID=1000
+    volumes:
+      - "./:/opt"
+      - ~/.ssh:/home/1000/.ssh
+    tty: true
