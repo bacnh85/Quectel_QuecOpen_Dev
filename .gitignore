@@ -1,6 +1,4 @@
-# remove OpenWrt folder as build folder
-EC21-E/
-EC25-E/
-
-# MacOS folder
-.DS_Store
+# Ignore SDK folders
+EC21*/
+EC25*/
+AG35*/

@@ -1,0 +1,3 @@
+[submodule "Quectel_QuecOpen_Examples"]
+	path = Quectel_QuecOpen_Examples
+	url = https://github.com/bacnh85/Quectel_QuecOpen_Examples.git

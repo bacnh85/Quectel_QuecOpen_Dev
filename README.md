@@ -21,32 +21,59 @@ docker pull bacnh85/quectel-quecopen
 2. Create docker container that point to your working directory
 
 ```
-docker run -d --name quectel-quecopen -e UID=`id -u` -e GID=`id -g` -v "$(pwd)":/opt -v ~/.ssh:/home/${UID}/.ssh bacnh85/quectel-quecopen
+docker run -d --name quectel-quecopen \
+ -e PUID=`id -u` -e PGID=`id -g` -v 
+ "$(pwd)":/opt bacnh85/quectel-quecopen
 ```
 
 3. Start the container shell to start build your application, the rootfs, kernel, ... 
 
 ```
-docker exec -it -u $UID quectel-quecopen /bin/bash
+docker exec -it -u `id -u` quectel-quecopen /bin/bash
 ```
 
-## Compile kernel, rootfs, ...
+## Docker Compose
 
-Start docker container and deal with EC2x SDK 
-
-```
-$ sh start.sh
-Recreating quecopen-dev ... done
-bacnh@e2c15b93e6a8:/opt$ 
-```
-
-## Debug the apps
+Sample `docker-compose.yml` is provided for more convenience.
 
 ```
-$ adb shell
-mdm9607-perf login: root
-Password: 
-root@mdm9607-perf:~#
+version: '3.4'
+services:
+  quectel-quecopen-dev:
+    image: bacnh85/quectel-quecopen
+    container_name: quectel-quecopen
+    environment:
+      - PUID=501
+      - PGID=20
+    volumes:
+      - "./:/opt"
+    tty: true
+```
+
+Then, power up the container:
+
+```
+docker-compose up -d
+```
+Login to the contailer shell:
+```
+docker exec -it -u `id -u` quectel-quecopen /bin/bash
+```
+
+## Usage for macOS users
+
+Due to OSX driver performance is not that good, a good approach is using NFS share. Thus, docker-compose file is more convience to start with.
+
+Before doing it, you need to config nfsd to share your current working directory to docker container, pls refer to [macos_setup_nfs.sh](script/macos_setup_nfs.sh)
+
+```
+docker-compose -f docker-compose_macos.yml up -d
+```
+
+Then, login to the container to start:
+
+```
+docker exec -it -u `id -u` quectel-quecopen /bin/bash
 ```
 
 

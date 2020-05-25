@@ -1,2 +1,4 @@
-EC21-E/
-EC25-E/
+# Ignore SDK folders
+EC21*/
+EC25*/
+AG35*/

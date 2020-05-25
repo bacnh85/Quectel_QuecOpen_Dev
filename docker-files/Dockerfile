@@ -1,8 +1,8 @@
 FROM ubuntu:16.04
 
 # Docker variables
-ARG UID=1000
-ARG GID=1000
+ARG PUID=1000
+ARG PGID=1000
 
 # Update packages
 RUN apt-get update && apt-get install -y \
