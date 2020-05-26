@@ -10,7 +10,7 @@ RUN apt-get update && apt-get install -y \
 	wget python subversion file cmake\
 	intltool quilt vim bc liblzo2-dev tree \ 
 	# for AG35
-	checkpolicy cryptsetup-bin kmod python3 \
+	checkpolicy cryptsetup-bin kmod python3 python3-pip \
 	# Clean up
 	&& rm -rf /var/lib/apt/lists/*
 
