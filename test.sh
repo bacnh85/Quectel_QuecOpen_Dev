@@ -1,8 +1,6 @@
 #!/bin/sh
 
 # build docker image
-docker build docker-files -t bacnh85/quectel-quecopen
-
 docker stop quectel-quecopen
 docker rm quectel-quecopen -v
 

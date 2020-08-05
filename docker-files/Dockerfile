@@ -11,6 +11,8 @@ RUN apt-get update && apt-get install -y \
 	intltool quilt vim bc liblzo2-dev tree \ 
 	# for AG35
 	checkpolicy cryptsetup-bin kmod python3 python3-pip \
+	# For secboot
+	mtd-utils squashfs-tools libxml2-utils cryptsetup-bin liblzo2-dev python-lzo \
 	# Clean up
 	&& rm -rf /var/lib/apt/lists/*
 

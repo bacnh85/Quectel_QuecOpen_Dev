@@ -55,7 +55,7 @@ FILE=/etc/exports
 sudo cp /dev/null $FILE
 grep -qF -- "$LINE" "$FILE" || sudo echo "$LINE" | sudo tee -a $FILE > /dev/null
 
-LINE="/Volumes/Work -alldirs -mapall=$U:$G localhost"
+LINE="/Volumes/HDD2 -alldirs -mapall=$U:$G localhost"
 grep -qF -- "$LINE" "$FILE" || sudo echo "$LINE" | sudo tee -a $FILE > /dev/null
 
 LINE="nfs.server.mount.require_resv_port = 0"
